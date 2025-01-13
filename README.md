@@ -56,7 +56,7 @@ Course Catalog Service is using several services that exist in AWS such as S3, R
 | **DB_HOST** | String | Database host |
 | **DB_NAME** | String | Database name |
 | **DB_USER** | String | Database username |
-| **DB_PASSWORD** | SecureString | Database password |
+| **DB_PASSWORD** | SecureString | swordDatabase pas |
 
 #### Run Unit Test
 You can easily run unit tests for Course Catalog Services for production test with the following command:
