@@ -29,9 +29,11 @@ post_build:
 reports:
   test-report:
     files:
-      - 'report/tets-result.xml'
+      - 'report/test-result.xml'
     file-format: JUNITXML
 
 artifacts:
   files:
     - imagedefinitions.json
+    - report/test-result.xml
+    - Dockerrun.aws.json
