@@ -16,10 +16,8 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 913524916797.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - echo 'AWS_ACCESS_KEY'='$AWS_ACCESS_KEY'
-      - echo 'AWS_SECRET_KEY'='$AWS_SECRET_KEY'
       - echo "Run unit testing and build docker image"
-      - docker build -t course-catalog:latest .
+      - docker build -t course-catalog:latest --build-arg NODE_ENV=$NODE_ENV --build-arg PORT=$PORT .
       - docker tag course-catalog:latest 913524916797.dkr.ecr.us-east-1.amazonaws.com/course-catalog:latest
   post_build:
     commands:
