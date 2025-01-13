@@ -6,7 +6,7 @@ env:
     ECR_REGION: us-east-1
     CONTAINER_NAME: course-catalog
 
-phase:
+phases:
   install:
     runtime-versions:
       nodejs: 18
