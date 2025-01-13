@@ -17,7 +17,7 @@ phases:
   build:
     commands:
       - echo 'AWS_ACCESS_KEY'='$AWS_ACCESS_KEY'
-      - echo 'AWS_SECRET_KEY''$AWS_SECRET_KEY'
+      - echo 'AWS_SECRET_KEY'='$AWS_SECRET_KEY'
       - echo "Run unit testing and build docker image"
       - docker build -t course-catalog:latest .
       - docker tag course-catalog:latest 913524916797.dkr.ecr.us-east-1.amazonaws.com/course-catalog:latest
@@ -25,7 +25,7 @@ phases:
     commands:
       - echo "push the image to ECR.."
       - docker push 913524916797.dkr.ecr.us-east-1.amazonaws.com/course-catalog:latest
-      - printf'[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME ${ECR_REPO}:latest > imagedefinitions.json
+      - printf'[{"name":"%s","imageUri":"%s"}]' course-catalog 913524916797.dkr.ecr.us-east-1.amazonaws.com/course-catalog:latest > imagedefinitions.json
       - echo "build complete.."
 
 reports:
