@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+ variables:
+  ECR_REPO: lks-catalog-image
+  ECR_REGION: us-east-1
+  CONTAINER_NAME: 913524916797.dkr.ecr.us-east-1.amazonaws.com
+
+phases:
+ install:
+  runtime-versions:
+   nodejs: 16
+
+ pre_build:
+  commands:
+   - echo "Install Dependencies and login into ECR"
+   - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 913524916797.dkr.ecr.us-east-1.amazonaws.com
+ build:
+  commands:
+   - echo "Run unit testing and build docker image"
+   - docker build -t lks-catalog-image .
+   - docker tag lks-catalog-image:latest 913524916797.dkr.ecr.us-east-1.amazonaws.com/lks-catalog-image:latest
+ post_build:
+  commands:
+   - echo "push the image to ECR.."
+   - docker push 913524916797.dkr.ecr.us-east-1.amazonaws.com/lks-catalog-image:latest
+   - printf'[{"name":"%s","imageUri":"%s"}]'$CONTAINER_NAME ${ECR_REPO}:latest > imagedefinitions.json
+   - echo "build complete"
+
+reports:
+ test-report:
+  files:
+    - 'report/test-result.xml'
+  file-format: JUNITXML
+
+artifacts:
+  files:
+    - imagedefinitions.json
