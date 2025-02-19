@@ -37,3 +37,5 @@ reports:
 artifacts:
   files:
     - imagedefinitions.json
+    - report/test-result.xml
+    - Dockerrun.aws.json
