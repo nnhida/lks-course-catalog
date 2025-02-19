@@ -32,7 +32,7 @@ reports:
   test-report:
     files:
       - 'report/test-result.xml'
-  file-format: JUNITXML
+    file-format: JUNITXML
 
 artifacts:
   files:
